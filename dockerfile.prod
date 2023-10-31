@@ -1,4 +1,4 @@
-FROM node:alpine as bulider
+FROM node:alpine as build
 
 WORKDIR /app
 
@@ -8,11 +8,12 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
 
-RUN npm run bulid
+RUN npm run build
 
 FROM nginx:latest
-COPY --from=builder /app/build /usr/share/nginx/html
+
+EXPOSE 3000
+COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

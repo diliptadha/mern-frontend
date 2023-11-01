@@ -11,3 +11,10 @@ services:
       - ./src:/app/src
     environment:
       - WATCHPACK_POLLING=true
+
+  json:
+    image: clue/json-server
+    ports:
+      - 8080:80
+    volumes:
+      - ./data.json:/data/db.json
